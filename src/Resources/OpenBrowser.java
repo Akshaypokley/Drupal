@@ -45,7 +45,7 @@ public class OpenBrowser {
 
     public static void getUrl(String url)
     {
-        driver.get("http://192.168.0.100/dd/");
+        driver.get("http://192.168.0.112/dd/");
 
     }
 

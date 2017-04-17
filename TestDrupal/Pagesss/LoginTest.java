@@ -1,6 +1,10 @@
 package Pagesss;
 
 import Packages.Login;
+import Resources.initExtentReport;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -21,6 +25,7 @@ import java.io.IOException;
 
 import static Resources.OpenBrowser.getUrl;
 import static Resources.OpenBrowser.openbrowser;
+import static Resources.TakeScreenShot.takeScreenshot;
 
 /**
  * Created by AKSHAY on 15/04/2017.
@@ -28,39 +33,62 @@ import static Resources.OpenBrowser.openbrowser;
 public class LoginTest {
 
     WebDriver driver;
-
+    ExtentReports extent ;
     @BeforeMethod
     public void LoadBrowser()
     {
+
+        extent = initExtentReport.init();
         driver =openbrowser("chrome");
         getUrl("url");
     }
 
     @Test(dataProvider = "ExcelData")
-    public void UserInput( String UserName,String UserPassword,String Expected,String Xpath)
-    {
+    public void UserInput( String UserName,String UserPassword,String Expected,String Xpath) throws IOException {
+        ExtentTest test = extent.startTest("Login Test", "To Test the functionalty of login button");
+
         try {
             Login login = new Login(driver);
-
+            test.log(LogStatus.INFO, " initialised driver");
             login.ClickLoginBt();
+            test.log(LogStatus.INFO, " Click On Login Button");
+
             login.setUserId(UserName);
+            test.log(LogStatus.INFO, " set User Name");
+
             login.setUserPassword(UserPassword);
+
+            test.log(LogStatus.INFO, " set user password");
+
             login.ClickLoBtn();
+
+            test.log(LogStatus.INFO, " perfrom login button functionalty");
+
             try {
                 String Actual = driver.findElement(By.xpath(Xpath)).getText();
                 Assert.assertEquals(Actual,Expected,"Test pass");
+                test.log(LogStatus.INFO, " Test Pass");
+
+                test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture("./Login/"+takeScreenshot(driver)));
 
             } catch (Throwable e)
 
             {
-                System.out.println(e);
+                /*System.out.println(e);*/
+                test.log(LogStatus.FAIL, "Element not found : "+e);
+                test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture("./Login/"+takeScreenshot(driver)));
+
             }
         }
         catch (AssertionError e)
         {
             System.out.println(e);
-        }
+            test.log(LogStatus.FAIL, "Element not found : "+e);
+            test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture("./Login/"+takeScreenshot(driver)));
 
+        }
+        extent.endTest(test);
+        extent.flush();
         driver.close();
     }
 

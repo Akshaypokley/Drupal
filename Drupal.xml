@@ -1,9 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite1" verbose="3" >
+<suite name="Suite1" verbose="10" >
     <test name="TestDrupal" >
         <classes>
             <class name="Pagesss.LoginTest" />
+            <class name="UITest.HomeTest" />
         </classes>
     </test>
 
