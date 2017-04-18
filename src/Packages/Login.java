@@ -32,7 +32,7 @@ public class Login {
 
         PageFactory.initElements(driver,this);
         if(!Logo.isDisplayed())
-            throw new IllegalStateException("This Not Login Button");
+            throw new IllegalStateException("This Not LoginFunction Button");
     }
 
     public WebElement getLogo()

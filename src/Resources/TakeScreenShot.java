@@ -21,8 +21,8 @@ public class TakeScreenShot
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         SimpleDateFormat sd = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
         String DateStr = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss").format(new Date());
-        String imageName = "Login"+DateStr+".png";
-        String imagePath="ExtenReport/Login/"+imageName;
+        String imageName = "LoginFunction"+DateStr+".png";
+        String imagePath="ExtenReport/LoginFunction/"+imageName;
         FileUtils.copyFile(scrFile, new File(imagePath));
 
         return imageName;

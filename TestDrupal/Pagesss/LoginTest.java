@@ -45,13 +45,13 @@ public class LoginTest {
 
     @Test(dataProvider = "ExcelData")
     public void UserInput( String UserName,String UserPassword,String Expected,String Xpath) throws IOException {
-        ExtentTest test = extent.startTest("Login Test", "To Test the functionalty of login button");
+        ExtentTest test = extent.startTest("LoginFunction Test", "To Test the functionalty of login button");
 
         try {
             Login login = new Login(driver);
             test.log(LogStatus.INFO, " initialised driver");
             login.ClickLoginBt();
-            test.log(LogStatus.INFO, " Click On Login Button");
+            test.log(LogStatus.INFO, " Click On LoginFunction Button");
 
             login.setUserId(UserName);
             test.log(LogStatus.INFO, " set User Name");
@@ -69,14 +69,14 @@ public class LoginTest {
                 Assert.assertEquals(Actual,Expected,"Test pass");
                 test.log(LogStatus.INFO, " Test Pass");
 
-                test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture("./Login/"+takeScreenshot(driver)));
+                test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture("./LoginFunction/"+takeScreenshot(driver)));
 
             } catch (Throwable e)
 
             {
                 /*System.out.println(e);*/
                 test.log(LogStatus.FAIL, "Element not found : "+e);
-                test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture("./Login/"+takeScreenshot(driver)));
+                test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture("./LoginFunction/"+takeScreenshot(driver)));
 
             }
         }
@@ -84,7 +84,7 @@ public class LoginTest {
         {
             System.out.println(e);
             test.log(LogStatus.FAIL, "Element not found : "+e);
-            test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture("./Login/"+takeScreenshot(driver)));
+            test.log(LogStatus.INFO, "Snapshot below: " + test.addScreenCapture("./LoginFunction/"+takeScreenshot(driver)));
 
         }
         extent.endTest(test);

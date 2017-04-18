@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
+import static Resources.LoginFunction.LogFunction;
 import static Resources.OpenBrowser.openbrowser;
 import static Resources.OpenBrowser.getUrl;
 
@@ -21,19 +22,21 @@ public class HomeTest {
 
     @BeforeMethod
     public void LoadBrowser() {
-        driver = openbrowser("chrome");
-        getUrl("url");
+
+        driver=LogFunction();
+//        driver = openbrowser("chrome");
+//        getUrl("url");
     }
 
     @Test
     public void HomeUITest() {
         try {
 
-            Login login = new Login(driver);
+           /* Login login = new Login(driver);
             login.ClickLoginBt();
             login.setUserId("akshay");
             login.setUserPassword("Akshay85Pokley");
-            login.ClickLoBtn();
+            login.ClickLoBtn();*/
 
             try {
                 String Expetecd = "akshay";
